@@ -16,7 +16,7 @@ class SurveyApp extends StatelessWidget {
       seedColor: const Color(0xFF0A6C74),
     );
     return MaterialApp(
-      title: 'Remote Survey',
+      title: 'Удаленный опрос',
       theme: ThemeData(
         colorScheme: colorScheme,
         useMaterial3: true,

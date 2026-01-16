@@ -138,18 +138,18 @@ class _SurveyScreenState extends State<SurveyScreen> {
     final confirmed = await showDialog<bool>(
           context: context,
           builder: (context) => AlertDialog(
-            title: const Text('Submit survey?'),
+            title: const Text('Отправить опрос?'),
             content: const Text(
-              'You will not be able to edit your answers after submission.',
+              'После отправки вы не сможете изменить ответы.',
             ),
             actions: [
               TextButton(
                 onPressed: () => Navigator.of(context).pop(false),
-                child: const Text('Cancel'),
+                child: const Text('Отмена'),
               ),
               ElevatedButton(
                 onPressed: () => Navigator.of(context).pop(true),
-                child: const Text('Submit'),
+                child: const Text('Отправить'),
               ),
             ],
           ),
@@ -204,7 +204,7 @@ class _SurveyScreenState extends State<SurveyScreen> {
         return;
       }
       ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(content: Text('Failed to save results: $error')),
+        SnackBar(content: Text('Не удалось сохранить результаты: $error')),
       );
     } finally {
       if (mounted) {
@@ -221,7 +221,7 @@ class _SurveyScreenState extends State<SurveyScreen> {
       case QuestionType.single:
         if (question.options.isEmpty) {
           return Text(
-            'No options provided for this question.',
+            'Для этого вопроса нет вариантов ответа.',
             style: theme.textTheme.bodyMedium,
           );
         }
@@ -250,7 +250,7 @@ class _SurveyScreenState extends State<SurveyScreen> {
       case QuestionType.multiple:
         if (question.options.isEmpty) {
           return Text(
-            'No options provided for this question.',
+            'Для этого вопроса нет вариантов ответа.',
             style: theme.textTheme.bodyMedium,
           );
         }
@@ -275,7 +275,7 @@ class _SurveyScreenState extends State<SurveyScreen> {
           controller: controller,
           decoration: const InputDecoration(
             border: OutlineInputBorder(),
-            hintText: 'Type your answer',
+            hintText: 'Введите ответ',
           ),
           maxLines: 4,
           onChanged: (value) => _setTextAnswer(question, value),
@@ -304,7 +304,7 @@ class _SurveyScreenState extends State<SurveyScreen> {
             Padding(
               padding: const EdgeInsets.all(16),
               child: Text(
-                'Question ${_currentIndex + 1} of $total',
+                'Вопрос ${_currentIndex + 1} из $total',
                 style: theme.textTheme.titleMedium,
               ),
             ),
@@ -333,7 +333,7 @@ class _SurveyScreenState extends State<SurveyScreen> {
                     child: OutlinedButton.icon(
                       onPressed: _currentIndex == 0 ? null : _previousQuestion,
                       icon: const Icon(Icons.chevron_left),
-                      label: const Text('Back'),
+                      label: const Text('Назад'),
                     ),
                   ),
                   const SizedBox(width: 12),
@@ -345,7 +345,7 @@ class _SurveyScreenState extends State<SurveyScreen> {
                               ? (isLast ? _finishSurvey : _nextQuestion)
                               : null),
                       icon: Icon(isLast ? Icons.check : Icons.chevron_right),
-                      label: Text(isLast ? 'Finish' : 'Next'),
+                      label: Text(isLast ? 'Завершить' : 'Далее'),
                     ),
                   ),
                 ],

@@ -42,7 +42,7 @@ class _ResultDetailScreenState extends State<ResultDetailScreen> {
 
   String _formatDate(String? value) {
     if (value == null) {
-      return 'Unknown';
+      return 'Неизвестно';
     }
     final parsed = DateTime.tryParse(value);
     if (parsed == null) {
@@ -57,7 +57,7 @@ class _ResultDetailScreenState extends State<ResultDetailScreen> {
   Future<void> _shareFile() async {
     await Share.shareXFiles(
       [XFile(widget.file.path)],
-      text: 'Survey result JSON',
+      text: 'Результат опроса (JSON)',
     );
   }
 
@@ -71,7 +71,7 @@ class _ResultDetailScreenState extends State<ResultDetailScreen> {
           IconButton(
             onPressed: _shareFile,
             icon: const Icon(Icons.share),
-            tooltip: 'Share',
+            tooltip: 'Поделиться',
           ),
         ],
       ),
@@ -84,12 +84,12 @@ class _ResultDetailScreenState extends State<ResultDetailScreen> {
             }
             if (snapshot.hasError) {
               return Center(
-                child: Text('Failed to load result: ${snapshot.error}'),
+                child: Text('Не удалось загрузить результат: ${snapshot.error}'),
               );
             }
             final payload = snapshot.data;
             if (payload == null) {
-              return const Center(child: Text('No data found.'));
+              return const Center(child: Text('Данные не найдены.'));
             }
             final parsed = payload.parsed;
             final answers = parsed?['answers'];
@@ -105,20 +105,20 @@ class _ResultDetailScreenState extends State<ResultDetailScreen> {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           Text(
-                            parsed['surveyTitle']?.toString() ?? 'Survey',
+                            parsed['surveyTitle']?.toString() ?? 'Опрос',
                             style: Theme.of(context).textTheme.titleLarge,
                           ),
                           const SizedBox(height: 8),
                           Text(
-                            'Device ID: ${parsed['deviceId'] ?? 'Unknown'}',
+                            'ID устройства: ${parsed['deviceId'] ?? 'Неизвестно'}',
                           ),
                           const SizedBox(height: 4),
                           Text(
-                            'Completed: ${_formatDate(parsed['completedAt']?.toString())}',
+                            'Завершено: ${_formatDate(parsed['completedAt']?.toString())}',
                           ),
                           if (answerCount != null) ...[
                             const SizedBox(height: 4),
-                            Text('Answers: $answerCount'),
+                            Text('Ответов: $answerCount'),
                           ],
                         ],
                       ),
@@ -126,7 +126,7 @@ class _ResultDetailScreenState extends State<ResultDetailScreen> {
                   ),
                 const SizedBox(height: 16),
                 Text(
-                  'Raw JSON',
+                  'JSON результат',
                   style: Theme.of(context).textTheme.titleMedium,
                 ),
                 const SizedBox(height: 8),

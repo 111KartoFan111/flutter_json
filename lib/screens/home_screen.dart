@@ -65,7 +65,7 @@ class _SurveyHomeScreenState extends State<SurveyHomeScreen> {
     final rawUrl = _urlController.text.trim();
     if (rawUrl.isEmpty) {
       setState(() {
-        _error = 'Enter a URL for the remote questions JSON.';
+        _error = 'Введите URL удаленной базы вопросов (JSON).';
         _survey = null;
       });
       return;
@@ -73,7 +73,7 @@ class _SurveyHomeScreenState extends State<SurveyHomeScreen> {
     final uri = Uri.tryParse(rawUrl);
     if (uri == null || !(uri.isScheme('http') || uri.isScheme('https'))) {
       setState(() {
-        _error = 'Invalid URL. Use http or https.';
+        _error = 'Некорректный URL. Используйте http или https.';
         _survey = null;
       });
       return;
@@ -99,7 +99,7 @@ class _SurveyHomeScreenState extends State<SurveyHomeScreen> {
         return;
       }
       setState(() {
-        _error = 'Failed to load questions: $error';
+        _error = 'Не удалось загрузить вопросы: $error';
         _survey = null;
       });
     } finally {
@@ -143,12 +143,12 @@ class _SurveyHomeScreenState extends State<SurveyHomeScreen> {
     final theme = Theme.of(context);
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Remote Survey'),
+        title: const Text('Удаленный опрос'),
         actions: [
           IconButton(
             onPressed: _openResults,
             icon: const Icon(Icons.folder_open),
-            tooltip: 'Results',
+            tooltip: 'Результаты',
           ),
         ],
       ),
@@ -157,7 +157,7 @@ class _SurveyHomeScreenState extends State<SurveyHomeScreen> {
           padding: const EdgeInsets.all(16),
           children: [
             Text(
-              'Remote questions URL',
+              'URL удаленной базы вопросов',
               style: theme.textTheme.titleMedium,
             ),
             const SizedBox(height: 8),
@@ -178,14 +178,14 @@ class _SurveyHomeScreenState extends State<SurveyHomeScreen> {
                   child: ElevatedButton.icon(
                     onPressed: _loading ? null : _loadQuestions,
                     icon: const Icon(Icons.download),
-                    label: const Text('Load questions'),
+                    label: const Text('Загрузить вопросы'),
                   ),
                 ),
                 const SizedBox(width: 12),
                 OutlinedButton.icon(
                   onPressed: _openResults,
                   icon: const Icon(Icons.list_alt),
-                  label: const Text('Results'),
+                  label: const Text('Результаты'),
                 ),
               ],
             ),
@@ -216,14 +216,14 @@ class _SurveyHomeScreenState extends State<SurveyHomeScreen> {
                       ),
                       const SizedBox(height: 8),
                       Text(
-                        '${_survey!.questions.length} questions loaded',
+                        '${_survey!.questions.length} вопросов загружено',
                         style: theme.textTheme.bodyMedium,
                       ),
                       const SizedBox(height: 16),
                       ElevatedButton(
                         onPressed:
                             _loading || _initializing ? null : _startSurvey,
-                        child: const Text('Start survey'),
+                        child: const Text('Начать опрос'),
                       ),
                     ],
                   ),
@@ -231,14 +231,14 @@ class _SurveyHomeScreenState extends State<SurveyHomeScreen> {
               ),
             ] else if (!_loading) ...[
               Text(
-                'Load questions to start the survey.',
+                'Загрузите вопросы, чтобы начать опрос.',
                 style: theme.textTheme.bodyMedium,
               ),
             ],
             const SizedBox(height: 16),
             if (_deviceId != null)
               Text(
-                'Device ID: $_deviceId',
+                'ID устройства: $_deviceId',
                 style: theme.textTheme.bodySmall,
               ),
           ],

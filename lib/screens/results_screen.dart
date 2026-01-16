@@ -43,7 +43,7 @@ class _ResultsScreenState extends State<ResultsScreen> {
         return;
       }
       setState(() {
-        _error = 'Failed to load results: $error';
+        _error = 'Не удалось загрузить результаты: $error';
       });
     } finally {
       if (mounted) {
@@ -93,7 +93,7 @@ class _ResultsScreenState extends State<ResultsScreen> {
         padding: const EdgeInsets.all(24),
         children: [
           Text(
-            'No results saved yet.',
+            'Результаты пока не сохранены.',
             style: theme.textTheme.bodyLarge,
             textAlign: TextAlign.center,
           ),
@@ -115,7 +115,7 @@ class _ResultsScreenState extends State<ResultsScreen> {
             title: Text(file.uri.pathSegments.last),
             subtitle: Text(
               '${_formatDateTime(stat.modified)} · '
-              '${stat.size} bytes',
+              '${stat.size} байт',
             ),
             trailing: const Icon(Icons.chevron_right),
             onTap: () {
@@ -134,7 +134,7 @@ class _ResultsScreenState extends State<ResultsScreen> {
     }
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Survey Results'),
+        title: const Text('Результаты опроса'),
       ),
       body: SafeArea(
         child: RefreshIndicator(
